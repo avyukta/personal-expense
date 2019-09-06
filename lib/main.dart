@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import './transaction.dart';
 
@@ -18,6 +19,12 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   final List<Transaction> transaction = [
     Transaction(id: 't1', title: 'clothes', amount: 78.8, date: DateTime.now()),
+    Transaction(
+        id: 't2', title: 'groceries', amount: 98.8, date: DateTime.now()),
+    Transaction(
+        id: 't2', title: 'groceries', amount: 98.8, date: DateTime.now()),
+    Transaction(
+        id: 't2', title: 'groceries', amount: 98.8, date: DateTime.now()),
     Transaction(
         id: 't2', title: 'groceries', amount: 98.8, date: DateTime.now()),
   ];
@@ -42,12 +49,46 @@ class MyHomePage extends StatelessWidget {
             ),
           ),
           Column(
-            children: transaction.map((tx) {
-              return Card(
-                child: Text(tx.title),
-              );
-            }).toList(),
-          )
+              children: transaction.map((tx) {
+            return Card(
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.purple, width: 2),
+                        color: Color.fromRGBO(128, 0, 128, 0)),
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      "\$${tx.amount}",
+                      style: TextStyle(
+                          color: Colors.purple,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        child: Text(
+                          tx.title,
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          DateFormat("d-Mm-y E").format(tx.date),
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            );
+          }).toList())
         ],
       ),
     );
