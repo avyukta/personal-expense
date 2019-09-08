@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
-import './transaction.dart';
+import './widgets/user_transaction.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,17 +15,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transaction> transaction = [
-    Transaction(id: 't1', title: 'clothes', amount: 78.8, date: DateTime.now()),
-    Transaction(
-        id: 't2', title: 'groceries', amount: 98.8, date: DateTime.now()),
-    Transaction(
-        id: 't2', title: 'groceries', amount: 98.8, date: DateTime.now()),
-    Transaction(
-        id: 't2', title: 'groceries', amount: 98.8, date: DateTime.now()),
-    Transaction(
-        id: 't2', title: 'groceries', amount: 98.8, date: DateTime.now()),
-  ];
+  // String titleInput;
+  // String amountInput;
 
   @override
   Widget build(BuildContext context) {
@@ -35,62 +24,28 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Flutter App"),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            child: Card(
-              elevation: 88.0,
-              //margin: EdgeInsets.all(80.0),
-              //color: Colors.greenAccent,
-              child: Text("widget Playground."),
-            ),
-          ),
-          Column(
-              children: transaction.map((tx) {
-            return Card(
-              child: Row(
+      body: Container(
+          height: 500,
+          child: ListView(
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.purple, width: 2),
-                        color: Color.fromRGBO(128, 0, 128, 0)),
-                    margin: EdgeInsets.all(10),
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      "\$${tx.amount}",
-                      style: TextStyle(
-                          color: Colors.purple,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
+                    width: double.infinity,
+                    child: Card(
+                      elevation: 88.0,
+                      //margin: EdgeInsets.all(80.0),
+                      //color: Colors.greenAccent,
+                      child: Text("widget Playground."),
                     ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          tx.title,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Container(
-                        child: Text(
-                          DateFormat("d-Mm-y E").format(tx.date),
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      )
-                    ],
-                  )
+                  UserTransaction()
                 ],
               ),
-            );
-          }).toList())
-        ],
-      ),
+            ],
+          )),
     );
   }
 }
